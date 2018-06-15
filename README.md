@@ -1,5 +1,7 @@
 This is ChlorophyII's TeX package. More details will be added later. 
 
+`\usepackage{ChlorophyII}`
+
 ## Highlights
 1. Zenburn mode: Add `\zenburn` somewhere before `\begin{document}`. Compile. Protect your eyes.
 2. Autobraces: Try `\abra{\abra{\abra{1+1}^{p+1}}+\frac{\pi^2}{6}}`. It will automatically increase its size depending on its contents.  
