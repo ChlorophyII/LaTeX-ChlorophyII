@@ -1,0 +1,90 @@
+\ProvidesPackage{ChlorophyII}
+\RequirePackage{amsmath, amssymb, amsthm, mathtools, xstring, xcolor}
+
+% ============================================================================ %
+% Package required: xcolor
+\def\zenburn
+{\pagecolor[RGB]{63,63,63}
+  \color[RGB]{220,220,205}}
+
+% ============================================================================ %
+
+\let\conjugate\overline
+\renewcommand{\Re}[1]{\operatorname{Re}\left({#1}\right)}
+\renewcommand{\Im}[1]{\operatorname{Im}\left({#1}\right)}
+\newcommand{\perm}[2][n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand{\comb}[2][n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+% ============================================================================ %
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+
+% ==================================== %
+% Autobraces
+% Package required: xstring
+\DeclarePairedDelimiter{\@abra}{(}{)}
+\let\@oldabra\@abra
+\def\@abra{\@ifstar{\@oldabra}{\@oldabra*}}
+
+\def\abra{\@ifnextchar[{\@abraArg}{\@abra}}
+\def\@abraArg[#1]#2{
+  \IfEqCase{#1}{
+    {big}{\bigl(#2\bigr)}
+    {Big}{\Bigl(#2\Bigr)}
+    {bigg}{\biggl(#2\biggr)}
+    {Bigg}{\Biggl(#2\Biggr)}
+  }
+}
+
+% ==================================== %
+% Autobrackets
+% Package required: xstring
+\DeclarePairedDelimiter{\@abrc}{[}{]}
+\let\@oldabrc\@abrc
+\def\@abrc{\@ifstar{\@oldabrc}{\@oldabrc*}}
+
+\def\abrc{\@ifnextchar[{\@abrcArg}{\@abrc}}
+\def\@abrcArg[#1]#2{
+  \IfEqCase{#1}{
+    {big}{\bigl[#2\bigr]}
+    {Big}{\Bigl[#2\Bigr]}
+    {bigg}{\biggl[#2\biggr]}
+    {Bigg}{\Biggl[#2\Biggr]}
+  }
+}
+
+% ============================================================================ %
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[section]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{fact}{Fact}
+
+% ============================================================================ %
