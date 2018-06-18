@@ -1,5 +1,5 @@
 \ProvidesPackage{ChlorophyII}
-\RequirePackage{amsmath, amssymb, amsthm, mathtools, xstring, xcolor}
+\RequirePackage{amsmath, amssymb, amsthm, mathtools, xstring, xcolor, xargs, xparse}
 
 % ============================================================================ %
 % Package required: xcolor
@@ -77,32 +77,21 @@
 
 \def\n{@index}
 
-\def\series{
-   \@ifnextchar[
-     {\series@i}
-     {\series@i[n]}
-}
-\def\series@i[#1]{
-   \@ifnextchar[
-     {\series@ii{#1}}
-     {\series@ii{#1}[1]}
-}
-\def\series@ii#1[#2]#3{
+\newcommandx{\series}[4][1=n,2=1,3=+]
+{\noexpandarg\exploregroups
   \IfEqCase{#2}{
-    {1}
-    {\StrSubstitute{#3}{\n}{1}+
-      \StrSubstitute{#3}{\n}{2}+
-      \cdots+
-      \StrSubstitute{#3}{\n}{#1}}
-    {0}
-    {\StrSubstitute{#3}{\n}{0}+
-      \StrSubstitute{#3}{\n}{1}+
-      \cdots+
-      \StrSubstitute{#3}{\n}{#1}}
+    {1}{\StrSubstitute{#4}{\n}{1}#3
+      \StrSubstitute{#4}{\n}{2}#3
+      \IfEq{#3}{,}{\dots}{\cdots}#3
+      \StrSubstitute{#4}{\n}{#1}}
+    {0}{\StrSubstitute{#4}{\n}{0}#3
+      \StrSubstitute{#4}{\n}{1}#3
+      \IfEq{#3}{,}{\dots}{\cdots}#3
+      \StrSubstitute{#4}{\n}{#1}}
   }
 }
 
-% ============================================================================ %
+%   ============================================================================ %
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
