@@ -70,6 +70,39 @@
 }
 
 % ============================================================================ %
+% Finite series in expanded form
+% \series[index][firstIndex]{generalTerm}
+% The first two arguments are optional. Use \n as index in generalTerm
+% Example: \series[k][0]{a_{n_\n}}
+
+\def\n{@index}
+
+\def\series{
+   \@ifnextchar[
+     {\series@i}
+     {\series@i[n]}
+}
+\def\series@i[#1]{
+   \@ifnextchar[
+     {\series@ii{#1}}
+     {\series@ii{#1}[1]}
+}
+\def\series@ii#1[#2]#3{
+  \IfEqCase{#2}{
+    {1}
+    {\StrSubstitute{#3}{\n}{1}+
+      \StrSubstitute{#3}{\n}{2}+
+      \cdots+
+      \StrSubstitute{#3}{\n}{#1}}
+    {0}
+    {\StrSubstitute{#3}{\n}{0}+
+      \StrSubstitute{#3}{\n}{1}+
+      \cdots+
+      \StrSubstitute{#3}{\n}{#1}}
+  }
+}
+
+% ============================================================================ %
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
