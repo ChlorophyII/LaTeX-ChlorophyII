@@ -36,15 +36,16 @@
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 
 % ==================================== %
-% Autobraces
+% Auto-brackets (round)
 % Package required: xstring
-\DeclarePairedDelimiter{\@abra}{(}{)}
-\let\@oldabra\@abra
-\def\@abra{\@ifstar{\@oldabra}{\@oldabra*}}
+\DeclarePairedDelimiter{\@abrr}{(}{)}
+\let\@oldabrr\@abrr
+\def\@abrr{\@ifstar{\@oldabrr}{\@oldabrr*}}
 
-\def\abra{\@ifnextchar[{\@abraArg}{\@abra}}
-\def\@abraArg[#1]#2{
+\def\abrr{\@ifnextchar[{\@abrrArg}{\@abrr}}
+\def\@abrrArg[#1]#2{
   \IfEqCase{#1}{
+    {normal}{(#2)}
     {big}{\bigl(#2\bigr)}
     {Big}{\Bigl(#2\Bigr)}
     {bigg}{\biggl(#2\biggr)}
@@ -53,19 +54,39 @@
 }
 
 % ==================================== %
-% Autobrackets
+% Auto-brackets (square)
 % Package required: xstring
-\DeclarePairedDelimiter{\@abrc}{[}{]}
+\DeclarePairedDelimiter{\@abrs}{[}{]}
+\let\@oldabrs\@abrs
+\def\@abrs{\@ifstar{\@oldabrs}{\@oldabrs*}}
+
+\def\abrs{\@ifnextchar[{\@abrsArg}{\@abrs}}
+\def\@abrsArg[#1]#2{
+  \IfEqCase{#1}{
+    {normal}{[#2]}
+    {big}{\bigl[#2\bigr]}
+    {Big}{\Bigl[#2\Bigr]}
+    {bigg}{\biggl[#2\biggr]}
+    {Bigg}{\Biggl[#2\Biggr]}
+  }
+}
+
+
+% ==================================== %
+% Auto-brackets (curly)
+% Package required: xstring
+\DeclarePairedDelimiter{\@abrc}{\{}{\}}
 \let\@oldabrc\@abrc
 \def\@abrc{\@ifstar{\@oldabrc}{\@oldabrc*}}
 
 \def\abrc{\@ifnextchar[{\@abrcArg}{\@abrc}}
 \def\@abrcArg[#1]#2{
   \IfEqCase{#1}{
-    {big}{\bigl[#2\bigr]}
-    {Big}{\Bigl[#2\Bigr]}
-    {bigg}{\biggl[#2\biggr]}
-    {Bigg}{\Biggl[#2\Biggr]}
+    {normal}{\{#2\}}
+    {big}{\bigl\{#2\bigr\}}
+    {Big}{\Bigl\{#2\Bigr\}}
+    {bigg}{\biggl\{#2\biggr\}}
+    {Bigg}{\Biggl\{#2\Biggr\}}
   }
 }
 
