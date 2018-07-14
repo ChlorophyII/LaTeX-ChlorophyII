@@ -36,6 +36,26 @@
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 
 % ==================================== %
+% Augmented pmatrix
+% The arguments are the number of columns before
+% and after the vertical line.
+\newenvironment{apmatrix}[2]{%
+  \left(\begin{array}{@{}*{#1}{c}|*{#2}{c}@{}}
+}{%
+  \end{array}\right)
+}
+
+% ==================================== %
+% Augmented bmatrix
+% The arguments are the number of columns before
+% and after the vertical line.
+\newenvironment{abmatrix}[2]{%
+  \left[\begin{array}{@{}*{#1}{c}|*{#2}{c}@{}}
+}{%
+  \end{array}\right]
+}
+
+% ==================================== %
 % Auto-brackets (round)
 % Package required: xstring
 \DeclarePairedDelimiter{\@abrr}{(}{)}

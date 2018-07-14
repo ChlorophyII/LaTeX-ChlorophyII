@@ -44,7 +44,23 @@ Look at [this question](https://tex.stackexchange.com/questions/1137/where-do-i-
 	
 3. `\abs{x-y},\norm{f-g}`  
 	<div  align="center"><img src="readme-images/abs_x-y_,_norm_f.jpeg"></div>  
-	
+
+4. `apmatrix` and `abmatrix` are augmented pmatrix and bmatrix. The arguments are the number of columns before and after the vertical line.
+
+   ```tex
+   DF=
+   \begin{apmatrix}{3}{3}
+     \dfrac{\partial F_1}{\partial x_1} & \cdots & \dfrac{\partial F_1}{\partial x_n} & \dfrac{\partial F_1}{\partial y_1} & \cdots & \dfrac{\partial F_1}{\partial y_m}\\
+     \vdots & \ddots & \vdots\ & \vdots & \ddots & \vdots\\
+     \dfrac{\partial F_m}{\partial x_1} & \cdots & \dfrac{\partial F_m}{\partial x_n} & \dfrac{\partial F_m}{\partial y_1} & \cdots & \dfrac{\partial F_m}{\partial x_n}
+   \end{apmatrix}
+   =
+   \begin{apmatrix}{1}{1}
+     D_{\mathbf{x}}F&D_{\mathbf{y}}F
+   \end{apmatrix}
+   ```
+    <div  align="center"><img src="readme-images/DF=_3_3_dfrac_pa.jpeg"></div>  
+
 4. Auto-brackets:  
 	It is convenient to use `\abrr`, `\abrs` and `\abrc` in a lot of situations. It helps you easily adjust the size of brackets and gives your code better structure.  
 	`\abrr{\abrr{\abrr{1+1}^{p+1}}+\frac{\pi^2}{6}}`  
