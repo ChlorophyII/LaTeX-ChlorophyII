@@ -134,20 +134,23 @@
 
 %   ============================================================================ %
 
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{lemma}[section]{Lemma}
+\DeclareOption{theorem}{
+  \theoremstyle{plain}
+  \newtheorem{theorem}{Theorem}[section]
+  \newtheorem{corollary}{Corollary}[theorem]
+  \newtheorem{proposition}{Proposition}[section]
+  \newtheorem{lemma}[section]{Lemma}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{conjecture}{Conjecture}[section]
-\newtheorem{example}{Example}[section]
+  \theoremstyle{definition}
+  \newtheorem{definition}{Definition}[section]
+  \newtheorem{conjecture}{Conjecture}[section]
+  \newtheorem{example}{Example}[section]
 
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{note}{Note}
-\newtheorem*{fact}{Fact}
+  \theoremstyle{remark}
+  \newtheorem*{remark}{Remark}
+  \newtheorem*{note}{Note}
+  \newtheorem*{fact}{Fact}
+}
+\ProcessOptions\relax
 
 % ============================================================================ %
