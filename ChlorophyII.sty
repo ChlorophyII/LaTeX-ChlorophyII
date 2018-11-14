@@ -91,7 +91,6 @@
   }
 }
 
-
 % ==================================== %
 % Auto-brackets (curly)
 % Package required: xstring
@@ -107,6 +106,24 @@
     {Big}{\Bigl\{#2\Bigr\}}
     {bigg}{\biggl\{#2\biggr\}}
     {Bigg}{\Biggl\{#2\Biggr\}}
+  }
+}
+
+% ==================================== %
+% Auto-brackets (angle)
+% Package required: xstring
+\DeclarePairedDelimiter{\@abra}{\langle}{\rangle}
+\let\@oldabra\@abra
+\def\@abra{\@ifstar{\@oldabra}{\@oldabra*}}
+
+\def\abra{\@ifnextchar[{\@abraArg}{\@abra}}
+\def\@abraArg[#1]#2{
+  \IfEqCase{#1}{
+    {normal}{\langle#2\rangle}
+    {big}{\bigl\langle#2\bigr\rangle}
+    {Big}{\Bigl\langle#2\Bigr\rangle}
+    {bigg}{\biggl\langle#2\biggr\rangle}
+    {Bigg}{\Biggl\langle#2\Biggr\rangle}
   }
 }
 
