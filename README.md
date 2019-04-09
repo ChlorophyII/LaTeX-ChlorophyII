@@ -102,7 +102,9 @@ Look at [this question](https://tex.stackexchange.com/questions/1137/where-do-i-
 	`\series[n][1][,]{\n}`  
 	<div  align="center"><img src="readme-images/series_n_1_,_n.jpeg"></div>  
 	
-6. Theorems, definitions and remarks:  
+6. Theorems, definitions and remarks:  	
+   This section is not loaded by default. To use it, use `\usepackage[theorem]{ChlorophyII}` in the preamble.  
+	
 	*definition*, *lemma*, *proposition*, *theorem*, *corollary*, *conjecture*, *example*, *remark*, *note* and *fact* are environments, and they are used in the same way. You may or may not give a name to the theorem or definition or...
 
 	```tex
