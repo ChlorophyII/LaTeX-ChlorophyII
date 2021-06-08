@@ -23,6 +23,111 @@
 
 % ============================================================================ %
 
+\newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}
+\newcommand{\autobox}{\collectbox{\setlength{\fboxsep}{1pt}\fbox{\BOXCONTENT}}}
+
+% ==================================== %
+
+\DeclareOption{algebra}{
+  \DeclareMathOperator{\id}{{id}}
+  \DeclareMathOperator{\im}{{im}}
+  \DeclareMathOperator{\coker}{{coker}}
+  \DeclareMathOperator{\sgn}{{sgn}}
+  \DeclareMathOperator{\Span}{{span}} % Capitalize to avoid confliction
+  \DeclareMathOperator{\Char}{{char}} % Capitalize to avoid confliction
+  \DeclareMathOperator{\rad}{{rad}}
+  \DeclareMathOperator{\tr}{{tr}}
+  \DeclareMathOperator{\rank}{{rank}}
+  \DeclareMathOperator{\diag}{{diag}}
+  \DeclareMathOperator{\gr}{{gr}}
+
+  \DeclareMathOperator{\Aut}{{Aut}}
+  \DeclareMathOperator{\Hom}{{Hom}}
+  \DeclareMathOperator{\End}{{End}}
+
+  \DeclareMathOperator{\Ext}{{Ext}}
+  \DeclareMathOperator{\Tor}{{Tor}}
+
+  \DeclareMathOperator{\SL}{{SL}}
+  \DeclareMathOperator{\GL}{{GL}}
+  \DeclareMathOperator{\PSL}{{PSL}}
+  \DeclareMathOperator{\PGL}{{PGL}}
+
+  \DeclareMathOperator{\codim}{{codim}}
+  \DeclareMathOperator{\height}{{height}}
+  \DeclareMathOperator{\length}{{length}}
+  \DeclareMathOperator{\trdeg}{{trdeg}}
+
+  \DeclareMathOperator{\Frac}{{Frac}}
+  \DeclareMathOperator{\Ind}{{Ind}}
+  \DeclareMathOperator{\Res}{{Res}}
+  \DeclareMathOperator{\Irr}{{Irr}}
+  \DeclareMathOperator{\Sym}{{Sym}}
+  \DeclareMathOperator{\Ass}{{Ass}}
+  \DeclareMathOperator{\Ann}{{Ann}}
+  \DeclareMathOperator{\Supp}{{Supp}}
+  \DeclareMathOperator{\cone}{cone}
+  \DeclareMathOperator{\ad}{{ad}}
+
+  \newcommand{\cat}[1]{\mathbf{#1}}
+  \newcommand{\opcat}[1]{{#1}^{\mathrm{op}}}
+  \mathchardef\mhyphen="2D
+  \newcommand{\catmod}{\mhyphen\cat{mod}}
+  \newcommand{\modcat}{\cat{mod}\mhyphen}
+  \newcommand{\catMod}{\mhyphen\cat{Mod}}
+  \newcommand{\Modcat}{\cat{Mod}\mhyphen}
+
+  \newcommand{\dual}[1]{{#1}\,\check{\vrule height1.3ex width0pt}}
+  \makeatletter
+
+  % https://tex.stackexchange.com/a/108974
+  \newcommand{\extp}{\@ifnextchar^\@extp{\@extp^{\,}}}
+  \def\@extp^#1{\mathop{\bigwedge\nolimits^{\!#1}}}
+  \makeatother
+
+  % restriction
+  \newcommand\restr[2]{
+    {% we make the whole thing an ordinary symbol
+      \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+        #1 % the function
+        \vphantom{\big|} % pretend it's a little taller at normal size
+      \right|_{#2} % this is the delimiter
+    }
+  }
+
+  \newcommand{\closure}{\overline}
+}
+
+% ==================================== %
+
+\DeclareOption{AG}{
+  \DeclareMathOperator{\Pic}{{Pic}}
+  \DeclareMathOperator{\Cl}{{Cl}} % divisor class group (Weil divisor)
+  \DeclareMathOperator{\Div}{{Div}} % divisor group (Weil divisor)
+  \DeclareMathOperator{\CaCl}{{CaCl}} % Cartier divisor class group
+  \DeclareMathOperator{\Spec}{{Spec}}
+  \DeclareMathOperator{\relSpec}{\underline{Spec}}
+  \DeclareMathOperator{\Proj}{{Proj}}
+  \DeclareMathOperator{\relProj}{\underline{Proj}}
+  \DeclareMathOperator{\Bl}{{Bl}} % blow-up
+
+  \newcommand{\red}{\text{red}}
+
+  \newcommand{\sh}{\mathcal}
+  \DeclareMathOperator{\HOM}{\sh{H}\! \mathit{om}}
+  \DeclareMathOperator{\EXT}{\sh{E}\! \mathit{xt}}
+  \makeatletter
+  \providecommand{\leftsquigarrow}{%
+    \mathrel{\mathpalette\reflect@squig\relax}%
+  }
+  \newcommand{\reflect@squig}[2]{%
+    \reflectbox{$\m@th#1\rightsquigarrow$}%
+  }
+  \makeatother
+}
+
+% ============================================================================ %
+
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 
@@ -149,7 +254,7 @@
   }
 }
 
-%   ============================================================================ %
+% ============================================================================ %
 
 \DeclareOption{theorem}{
   \theoremstyle{plain}
