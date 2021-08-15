@@ -128,19 +128,6 @@
 
 % ============================================================================ %
 
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
-
-% Swap the definition of \abs* and \norm*, so that \abs
-% and \norm resizes the size of the brackets, and the 
-% starred version does not.
-\let\oldabs\abs
-\def\abs{\@ifstar{\oldabs}{\oldabs*}}
-
-\let\oldnorm\norm
-\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
-
-% ==================================== %
 % Augmented pmatrix
 % The arguments are the number of columns before
 % and after the vertical line.
@@ -161,20 +148,69 @@
 }
 
 % ==================================== %
+% Absolute value
+% Package required: xstring
+\DeclarePairedDelimiter{\@abs}{\lvert}{\rvert}
+% Swap the definition of \@abs and \@abs*, so that \@abs resizes the vertical bars and
+% the starred version does not.
+\let\@oldabs\@abs
+\def\@abs{\@ifstar{\@oldabs}{\@oldabs*}}
+
+\NewDocumentCommand{\abs}{o m}{
+  \IfNoValueTF{#1}{
+    \@abs{#2}
+  }{
+    \IfEqCase{#1}{
+      {normal}{\abs*{#2}}
+      {big}{\bigl|#2\bigr|}
+      {Big}{\Bigl|#2\Bigl|}
+      {bigg}{\biggl|#2\biggr|}
+      {Bigg}{\Biggl|#2\Biggr|}
+    }
+  }
+}
+
+% ==================================== %
+% Norm
+% Package required: xstring
+\DeclarePairedDelimiter{\@norm}{\lvert}{\rvert}
+% Swap the definition of \@norm and \@norm*, so that \@norm resizes the vertical bars and
+% the starred version does not.
+\let\@oldnorm\@norm
+\def\@norm{\@ifstar{\@oldnorm}{\@oldnorm*}}
+
+\NewDocumentCommand{\norm}{o m}{
+  \IfNoValueTF{#1}{
+    \@norm{#2}
+  }{
+    \IfEqCase{#1}{
+      {normal}{\norm*{#2}}
+      {big}{\bigl\Vert#2\bigr\Vert}
+      {Big}{\Bigl\Vert#2\Bigl\Vert}
+      {bigg}{\biggl\Vert#2\biggr\Vert}
+      {Bigg}{\Biggl\Vert#2\Biggr\Vert}
+    }
+  }
+}
+
+% ==================================== %
 % Auto-brackets (round)
 % Package required: xstring
 \DeclarePairedDelimiter{\@abrr}{(}{)}
 \let\@oldabrr\@abrr
 \def\@abrr{\@ifstar{\@oldabrr}{\@oldabrr*}}
 
-\def\abrr{\@ifnextchar[{\@abrrArg}{\@abrr}}
-\def\@abrrArg[#1]#2{
-  \IfEqCase{#1}{
-    {normal}{(#2)}
-    {big}{\bigl(#2\bigr)}
-    {Big}{\Bigl(#2\Bigr)}
-    {bigg}{\biggl(#2\biggr)}
-    {Bigg}{\Biggl(#2\Biggr)}
+\NewDocumentCommand{\abrr}{o m}{
+  \IfNoValueTF{#1}{
+    \@abrr{#2}
+  }{
+    \IfEqCase{#1}{
+      {normal}{(#2)}
+      {big}{\bigl(#2\bigr)}
+      {Big}{\Bigl(#2\Bigr)}
+      {bigg}{\biggl(#2\biggr)}
+      {Bigg}{\Biggl(#2\Biggr)}
+    }
   }
 }
 
@@ -185,14 +221,17 @@
 \let\@oldabrs\@abrs
 \def\@abrs{\@ifstar{\@oldabrs}{\@oldabrs*}}
 
-\def\abrs{\@ifnextchar[{\@abrsArg}{\@abrs}}
-\def\@abrsArg[#1]#2{
-  \IfEqCase{#1}{
-    {normal}{[#2]}
-    {big}{\bigl[#2\bigr]}
-    {Big}{\Bigl[#2\Bigr]}
-    {bigg}{\biggl[#2\biggr]}
-    {Bigg}{\Biggl[#2\Biggr]}
+\NewDocumentCommand{\abrs}{o m}{
+  \IfNoValueTF{#1}{
+    \@abrs{#2}
+  }{
+    \IfEqCase{#1}{
+      {normal}{[#2]}
+      {big}{\bigl[#2\bigr]}
+      {Big}{\Bigl[#2\Bigr]}
+      {bigg}{\biggl[#2\biggr]}
+      {Bigg}{\Biggl[#2\Biggr]}
+    }
   }
 }
 
@@ -203,14 +242,17 @@
 \let\@oldabrc\@abrc
 \def\@abrc{\@ifstar{\@oldabrc}{\@oldabrc*}}
 
-\def\abrc{\@ifnextchar[{\@abrcArg}{\@abrc}}
-\def\@abrcArg[#1]#2{
-  \IfEqCase{#1}{
-    {normal}{\{#2\}}
-    {big}{\bigl\{#2\bigr\}}
-    {Big}{\Bigl\{#2\Bigr\}}
-    {bigg}{\biggl\{#2\biggr\}}
-    {Bigg}{\Biggl\{#2\Biggr\}}
+\NewDocumentCommand{\abrc}{o m}{
+  \IfNoValueTF{#1}{
+    \@abrc{#2}
+  }{
+    \IfEqCase{#1}{
+      {normal}{\{#2\}}
+      {big}{\bigl\{#2\bigr\}}
+      {Big}{\Bigl\{#2\Bigr\}}
+      {bigg}{\biggl\{#2\biggr\}}
+      {Bigg}{\Biggl\{#2\Biggr\}}
+    }
   }
 }
 
@@ -221,14 +263,17 @@
 \let\@oldabra\@abra
 \def\@abra{\@ifstar{\@oldabra}{\@oldabra*}}
 
-\def\abra{\@ifnextchar[{\@abraArg}{\@abra}}
-\def\@abraArg[#1]#2{
-  \IfEqCase{#1}{
-    {normal}{\langle#2\rangle}
-    {big}{\bigl\langle#2\bigr\rangle}
-    {Big}{\Bigl\langle#2\Bigr\rangle}
-    {bigg}{\biggl\langle#2\biggr\rangle}
-    {Bigg}{\Biggl\langle#2\Biggr\rangle}
+\NewDocumentCommand{\abra}{o m}{
+  \IfNoValueTF{#1}{
+    \@abra{#2}
+  }{
+    \IfEqCase{#1}{
+      {normal}{\langle#2\rangle}
+      {big}{\bigl\langle#2\bigr\rangle}
+      {Big}{\Bigl\langle#2\Bigr\rangle}
+      {bigg}{\biggl\langle#2\biggr\rangle}
+      {Bigg}{\Biggl\langle#2\Biggr\rangle}
+    }
   }
 }
 
@@ -238,19 +283,19 @@
 % The first two arguments are optional. Use \n as index in generalTerm
 % Example: \series[k][0]{a_{n_\n}}
 
-\def\n{@index}
+\def\@n{@index}
 
 \newcommandx{\series}[4][1=n,2=1,3=+]
 {\noexpandarg\exploregroups
   \IfEqCase{#2}{
-    {1}{\StrSubstitute{#4}{\n}{1}#3
-      \StrSubstitute{#4}{\n}{2}#3
+    {1}{\StrSubstitute{#4}{\@n}{1}#3
+      \StrSubstitute{#4}{\@n}{2}#3
       \IfEq{#3}{,}{\dots}{\cdots}#3
-      \StrSubstitute{#4}{\n}{#1}}
-    {0}{\StrSubstitute{#4}{\n}{0}#3
-      \StrSubstitute{#4}{\n}{1}#3
+      \StrSubstitute{#4}{\@n}{#1}}
+    {0}{\StrSubstitute{#4}{\@n}{0}#3
+      \StrSubstitute{#4}{\@n}{1}#3
       \IfEq{#3}{,}{\dots}{\cdots}#3
-      \StrSubstitute{#4}{\n}{#1}}
+      \StrSubstitute{#4}{\@n}{#1}}
   }
 }
 
